@@ -31,11 +31,32 @@
     }());
 
     function WebpIsSupported() {
+
         if (!window.createImageBitmap) {
             return false;
         }
-        return true;
+
+        var xhr = new XMLHttpRequest();
+
+        var webpData = 'data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=';
+        xhr.open('GET', webpData, true);
+
+        xhr.responseType = 'blob';
+
+        xhr.onload = function() {
+            
+            console.log(createImageBitmap(this.response));
+            return true;
+        };
+
+        xhr.onerror = function() {
+            return false;
+        };
+
+        xhr.send();
     }
+
+    var webpIsSupported = WebpIsSupported();
 
     function loadTueri() {
         var tueriImages = document.getElementsByClassName("tueri");
@@ -54,8 +75,8 @@
                     width = element.offsetWidth;
                     element = element.parentNode;
                 }
-                const webp = WebpIsSupported() ? '&type=webp' : ''   
-                tueriImages[i].setAttribute("src", dataSrc + '?scale.width=' + width + webp);
+                const webp = webpIsSupported ? '&fm=webp' : ''   
+                tueriImages[i].setAttribute("src", dataSrc + '?w=' + width + webp);
             }
         }
         window.requestAnimationFrame(loadTueri);
