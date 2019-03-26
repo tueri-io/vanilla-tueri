@@ -4,7 +4,7 @@
     // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
 
     // MIT license
-
+console.log('test')
     (function() {
         var lastTime = 0;
         var vendors = ['ms', 'moz', 'webkit', 'o'];
