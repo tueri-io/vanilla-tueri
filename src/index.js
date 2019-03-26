@@ -32,33 +32,19 @@
 
     function WebpIsSupported() {
 
-        if (!window.createImageBitmap) {
-            return false;
-        }
+        if (!self.createImageBitmap) return false
 
-        var xhr = new XMLHttpRequest();
-
-        var webpData = 'data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=';
-        xhr.open('GET', webpData, true);
-
-        xhr.responseType = 'blob';
-
-        xhr.onload = function() {
-            
-            console.log(createImageBitmap(this.response));
-            return true;
-        };
-
-        xhr.onerror = function() {
-            return false;
-        };
-
-        xhr.send();
+        const webpData = 'data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=';
+        return fetch(webpData)
+        .then(r => r.blob())
+        .then(blob => createImageBitmap(blob).then(() => true, () => false))
     }
 
-    var webpIsSupported = WebpIsSupported();
+    
 
-    function loadTueri() {
+    async function loadTueri() {
+        var webpIsSupported = await WebpIsSupported();
+        console.log('WEBP Support', webpIsSupported);
         var tueriImages = document.getElementsByClassName("tueri");
         for(var i = 0; i < tueriImages.length; i++) {
             if (tueriImages[i].getAttribute('src') === null) {
