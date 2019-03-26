@@ -4,7 +4,7 @@
     // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
 
     // MIT license
-console.log('test')
+console.log('test');
     (function() {
         var lastTime = 0;
         var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -44,11 +44,10 @@ console.log('test')
 
     async function loadTueri() {
         var webpIsSupported = await WebpIsSupported();
-        console.log('WEBP Support', webpIsSupported);
-        var tueriImages = document.getElementsByClassName("tueri");
+        var tueriImages = document.getElementsByTagName("img");
         for(var i = 0; i < tueriImages.length; i++) {
-            if (tueriImages[i].getAttribute('src') === null) {
-                var originalDataSrc = tueriImages[i].getAttribute("data-src").split('/');
+            if (tueriImages[i].getAttribute('src') === null && typeof tueriImages[i].getAttribute('tueri-src') !== 'undefined') {
+                var originalDataSrc = tueriImages[i].getAttribute("tueri-src").split('/');
                 var dataSrc = '';
                 for (var ii = 0; ii < originalDataSrc.length; ii++) {
                     var newSrc = ii < 5 ? originalDataSrc[ii] + '/' : ii === 5 ? originalDataSrc[ii] : '%2f' + originalDataSrc[ii];
@@ -68,3 +67,4 @@ console.log('test')
         window.requestAnimationFrame(loadTueri);
     }
     window.requestAnimationFrame(loadTueri);
+    // loadTueri();
