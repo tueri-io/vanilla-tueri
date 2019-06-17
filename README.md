@@ -1,5 +1,6 @@
-# vanilla-tueri
-Integrate Tueri.io with Vanilla Javascript
+# Tueri.io - Javascript Integration
+
+Integrate Tueri.io with Javascript
 
 ## Installation
 
